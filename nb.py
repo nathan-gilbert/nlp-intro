@@ -14,8 +14,9 @@ if __name__ == "__main__":
     negative_features = [(word_feats(movie_reviews.words(fileids=[f])), 'neg') for f in negative_ids]
     positive_features = [(word_feats(movie_reviews.words(fileids=[f])), 'pos') for f in positive_ids]
 
-    neg_cutoff = len(negative_features) * 3 / 4
-    pos_cutoff = len(positive_features) * 3 / 4
+    # 80/20 training / testing split
+    neg_cutoff = round(len(negative_features) * 0.80)
+    pos_cutoff = round(len(positive_features) * 0.80)
 
     training_features = negative_features[:neg_cutoff] + positive_features[:pos_cutoff]
     testing_features = negative_features[neg_cutoff:] + positive_features[pos_cutoff:]
